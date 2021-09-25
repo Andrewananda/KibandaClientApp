@@ -5,4 +5,5 @@ export const colors = {
   darkGray: '#c0c0c0',
   lightGray: '#f6f6f6',
   blue: 'blue',
+  amountColor: '#9d9d9d',
 };

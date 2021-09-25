@@ -66,7 +66,7 @@ export default class StockItem extends Component {
                 style={{
                   fontSize: moderateScale(15),
                   fontWeight: 'bold',
-                  color: colors.darkGray,
+                  color: colors.amountColor,
                 }}>
                 {item.amount}
               </Text>
