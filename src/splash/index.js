@@ -2,10 +2,28 @@ import React, {Component} from 'react';
 import {ActivityIndicator, SafeAreaView, Text, View} from 'react-native';
 import {CommonActions} from '@react-navigation/native';
 import {colors} from '../util/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Splash extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  async loadData() {
+    try {
+      const user = await AsyncStorage.getItem('user');
+      if (user !== null) {
+        this.redirect('Home');
+      } else {
+        this.redirect('Login');
+      }
+    } catch (e) {
+      console.log('AsyncStorageError', e);
+    }
   }
 
   redirect(page) {
