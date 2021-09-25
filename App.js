@@ -26,7 +26,11 @@ class App extends Component {
             name={'Login'}
             component={Login}
           />
-          <Stack.Screen name={'Home'} component={Home} />
+          <Stack.Screen
+            name={'Home'}
+            options={{title: 'Available Stock'}}
+            component={Home}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
