@@ -150,27 +150,29 @@ class StockItem extends Component {
               </View>
             )}
           />
-          <View style={{backgroundColor: colors.color_secondary}}>
-            <Pressable
-              style={{
-                padding: moderateScale(20),
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
-              <View>
-                <Text style={{color: colors.white}}>
-                  Proceed to checkout {'(' + this.state.numberOfItems + ')'}
-                </Text>
-              </View>
-              <View>
-                <Icon
-                  name={'greater-than'}
-                  color={colors.white}
-                  type={'MaterialCommunityIcons'}
-                />
-              </View>
-            </Pressable>
-          </View>
+          {this.state.numberOfItems > 0 && (
+            <View style={{backgroundColor: colors.color_secondary}}>
+              <Pressable
+                style={{
+                  padding: moderateScale(20),
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <View>
+                  <Text style={{color: colors.white}}>
+                    Proceed to checkout {'(' + this.state.numberOfItems + ')'}
+                  </Text>
+                </View>
+                <View>
+                  <Icon
+                    name={'greater-than'}
+                    color={colors.white}
+                    type={'MaterialCommunityIcons'}
+                  />
+                </View>
+              </Pressable>
+            </View>
+          )}
         </View>
       </SafeAreaView>
     );
