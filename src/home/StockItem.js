@@ -5,10 +5,19 @@ import {Card} from 'react-native-paper';
 import {moderateScale} from 'react-native-size-matters';
 import {colors} from '../util/colors';
 import Icon from '../util/Icon';
+import {SimpleStepper} from 'react-native-simple-stepper';
+import {md5} from 'yarn/lib/cli';
 
 export default class StockItem extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      value: 0,
+    };
+  }
+
+  valueChanged(value) {
+    this.setState({value: value + 1});
   }
 
   renderItem = ({item}) => {
@@ -46,7 +55,7 @@ export default class StockItem extends Component {
                 style={{
                   fontWeight: 'bold',
                   fontSize: moderateScale(16),
-                  width: moderateScale(220),
+                  width: moderateScale(168),
                 }}>
                 {item.title}
               </Text>
@@ -56,7 +65,7 @@ export default class StockItem extends Component {
                 style={{
                   fontSize: moderateScale(14),
                   color: colors.darkGray,
-                  width: moderateScale(200),
+                  width: moderateScale(168),
                 }}>
                 {item.description}
               </Text>
@@ -74,19 +83,39 @@ export default class StockItem extends Component {
           </View>
           <View
             style={{
-              paddingRight: moderateScale(20),
               flexDirection: 'column',
               justifyContent: 'flex-end',
             }}>
-            <Icon
-              type={'Feather'}
-              size={24}
-              style={{
-                paddingRight: moderateScale(10),
-                paddingBottom: moderateScale(10),
+            <SimpleStepper
+              decrementImageStyle={{width: 20, height: 20}}
+              incrementImageStyle={{width: 20, height: 20}}
+              valueChanged={value => this.valueChanged(value)}
+              separatorStyle={{backgroundColor: colors.color_secondary}}
+              containerStyle={{
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+                borderWidth: 2,
+                borderRadius: 8,
+                overflow: 'hidden',
+                alignItems: 'center',
+                borderColor: colors.color_secondary,
               }}
-              name={'plus'}
+              textStyle={{
+                fontSize: moderateScale(12),
+                fontWeight: 'bold',
+                color: 'black',
+              }}
+              showText={true}
             />
+            {/*<Icon*/}
+            {/*  type={'Feather'}*/}
+            {/*  size={24}*/}
+            {/*  style={{*/}
+            {/*    paddingRight: moderateScale(10),*/}
+            {/*    paddingBottom: moderateScale(10),*/}
+            {/*  }}*/}
+            {/*  name={'plus'}*/}
+            {/*/>*/}
           </View>
         </View>
       </Card>
