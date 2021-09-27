@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {FlatList, Image, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './styles';
 import {Card} from 'react-native-paper';
 import {moderateScale} from 'react-native-size-matters';
@@ -107,15 +114,6 @@ export default class StockItem extends Component {
               }}
               showText={true}
             />
-            {/*<Icon*/}
-            {/*  type={'Feather'}*/}
-            {/*  size={24}*/}
-            {/*  style={{*/}
-            {/*    paddingRight: moderateScale(10),*/}
-            {/*    paddingBottom: moderateScale(10),*/}
-            {/*  }}*/}
-            {/*  name={'plus'}*/}
-            {/*/>*/}
           </View>
         </View>
       </Card>
@@ -124,15 +122,40 @@ export default class StockItem extends Component {
 
   render() {
     return (
-      <FlatList
-        data={this.props.data}
-        renderItem={this.renderItem}
-        ListEmptyComponent={() => (
-          <View style={styles.noOrdersView}>
-            <Text style={styles.noOrdersTxt}>No Stock Available</Text>
+      <SafeAreaView style={{flex: 1}}>
+        <View style={{flex: 1}}>
+          <FlatList
+            data={this.props.data}
+            renderItem={this.renderItem}
+            ListEmptyComponent={() => (
+              <View style={styles.noOrdersView}>
+                <Text style={styles.noOrdersTxt}>No Stock Available</Text>
+              </View>
+            )}
+          />
+          <View style={{backgroundColor: colors.color_secondary}}>
+            <Pressable
+              style={{
+                padding: moderateScale(20),
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <View>
+                <Text style={{color: colors.white}}>
+                  Proceed to checkout ({this.state.value})
+                </Text>
+              </View>
+              <View>
+                <Icon
+                  name={'greater-than'}
+                  color={colors.white}
+                  type={'MaterialCommunityIcons'}
+                />
+              </View>
+            </Pressable>
           </View>
-        )}
-      />
+        </View>
+      </SafeAreaView>
     );
   }
 }
