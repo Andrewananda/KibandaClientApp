@@ -13,19 +13,32 @@ import {moderateScale} from 'react-native-size-matters';
 import {colors} from '../util/colors';
 import Icon from '../util/Icon';
 import {SimpleStepper} from 'react-native-simple-stepper';
-import {md5} from 'yarn/lib/cli';
+import {bindActionCreators} from 'redux';
+import {addCart} from '../redux/action';
+import {connect} from 'react-redux';
 
-export default class StockItem extends Component {
+class StockItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0,
+      numberOfItems: 0,
     };
   }
 
-  valueChanged(value) {
-    this.setState({value: value + 1});
+  valueChanged(value, item) {
+    console.log(value);
+    if (value > 0) {
+      let newCount = this.state.numberOfItems + 1;
+      this.setState({numberOfItems: newCount}, () => {
+        this.props.addItem(item);
+      });
+    }
   }
+
+  decrementCount = () => {
+    let newCount = this.state.numberOfItems - 1;
+    this.setState({numberOfItems: newCount});
+  };
 
   renderItem = ({item}) => {
     return (
@@ -96,8 +109,10 @@ export default class StockItem extends Component {
             <SimpleStepper
               decrementImageStyle={{width: 20, height: 20}}
               incrementImageStyle={{width: 20, height: 20}}
-              valueChanged={value => this.valueChanged(value)}
+              valueChanged={value => this.valueChanged(value, item)}
+              onDecrement={this.decrementCount}
               separatorStyle={{backgroundColor: colors.color_secondary}}
+              initialValue={0}
               containerStyle={{
                 backgroundColor: 'transparent',
                 flexDirection: 'row',
@@ -112,6 +127,8 @@ export default class StockItem extends Component {
                 fontWeight: 'bold',
                 color: 'black',
               }}
+              stepValue={1}
+              maximumValue={100}
               showText={true}
             />
           </View>
@@ -142,7 +159,7 @@ export default class StockItem extends Component {
               }}>
               <View>
                 <Text style={{color: colors.white}}>
-                  Proceed to checkout ({this.state.value})
+                  Proceed to checkout {'(' + this.state.numberOfItems + ')'}
                 </Text>
               </View>
               <View>
@@ -159,3 +176,20 @@ export default class StockItem extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    itemCount: state.appState.count,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      addItem: addCart,
+    },
+    dispatch,
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StockItem);
