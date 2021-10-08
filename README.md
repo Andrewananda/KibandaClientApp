@@ -18,7 +18,6 @@ npm install
 
 There are two options after that, you can run the application for Android or for iOS
 For Android run:
-
 ```bash
 npm run android
 ```
