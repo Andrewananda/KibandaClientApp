@@ -26,7 +26,6 @@ class StockItem extends Component {
   }
 
   valueChanged(value, item) {
-    console.log(value);
     if (value > 0) {
       let newCount = this.state.numberOfItems + 1;
       this.setState({numberOfItems: newCount}, () => {
@@ -46,6 +45,7 @@ class StockItem extends Component {
         style={{
           margin: moderateScale(6),
           elevation: moderateScale(4),
+          width: '98%',
         }}>
         <View style={{flexDirection: 'row'}}>
           <View
@@ -75,7 +75,7 @@ class StockItem extends Component {
                 style={{
                   fontWeight: 'bold',
                   fontSize: moderateScale(16),
-                  width: moderateScale(168),
+                  width: moderateScale(160),
                 }}>
                 {item.title}
               </Text>
@@ -85,7 +85,7 @@ class StockItem extends Component {
                 style={{
                   fontSize: moderateScale(14),
                   color: colors.darkGray,
-                  width: moderateScale(168),
+                  width: moderateScale(160),
                 }}>
                 {item.description}
               </Text>
@@ -121,6 +121,7 @@ class StockItem extends Component {
                 overflow: 'hidden',
                 alignItems: 'center',
                 borderColor: colors.color_secondary,
+                marginRight: moderateScale(30),
               }}
               textStyle={{
                 fontSize: moderateScale(12),
@@ -157,6 +158,9 @@ class StockItem extends Component {
                   padding: moderateScale(20),
                   flexDirection: 'row',
                   justifyContent: 'space-between',
+                }}
+                onPress={() => {
+                  this.props.navigation.navigate('Cart');
                 }}>
                 <View>
                   <Text style={{color: colors.white}}>

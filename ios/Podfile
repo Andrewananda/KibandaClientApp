@@ -5,6 +5,8 @@ platform :ios, '11.0'
 
 target 'KibandaCustomerApp' do
   config = use_native_modules!
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -12,7 +14,6 @@ target 'KibandaCustomerApp' do
     :hermes_enabled => false
   )
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'KibandaCustomerAppTests' do
     inherit! :complete

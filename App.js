@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Splash from './src/splash';
 import Login from './src/login';
 import Home from './src/home';
+import Cart from './src/cart';
 
 const Stack = createStackNavigator();
 class App extends Component {
@@ -30,6 +31,11 @@ class App extends Component {
             name={'Home'}
             options={{title: 'Available Stock'}}
             component={Home}
+          />
+          <Stack.Screen
+            name={'Cart'}
+            component={Cart}
+            options={{title: 'My Cart'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

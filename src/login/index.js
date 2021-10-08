@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Text,
   ToastAndroid,
+  Platform,
   View,
 } from 'react-native';
 import {TextInput} from 'react-native-paper';
@@ -95,7 +96,9 @@ export default class Login extends Component {
       if (user.length > 0) {
         this.storeUser(user[0]);
       } else {
-        ToastAndroid.show('User not found', 1000);
+        if (Platform.OS == 'android') {
+          ToastAndroid.show('User not found', 1000);
+        }
       }
     } else {
       //empty inputs
