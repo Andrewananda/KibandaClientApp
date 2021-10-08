@@ -74,7 +74,7 @@ class StockItem extends Component {
               <Text
                 style={{
                   fontWeight: 'bold',
-                  fontSize: moderateScale(16),
+                  fontSize: moderateScale(14),
                   width: moderateScale(160),
                 }}>
                 {item.title}
@@ -120,7 +120,7 @@ class StockItem extends Component {
                 borderRadius: 8,
                 overflow: 'hidden',
                 alignItems: 'center',
-                borderColor: colors.color_secondary,
+                borderColor: '#fff',
                 marginRight: moderateScale(30),
               }}
               textStyle={{
